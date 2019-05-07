@@ -1,6 +1,7 @@
 const harvester = require('./role.harvester')
 const upgrader = require('./role.upgrader')
 const builder = require('./role.builder')
+const repairer = require('./role.repairer')
 const spawn = require('./spawn')
 
 module.exports.loop = () => {
@@ -15,6 +16,9 @@ module.exports.loop = () => {
                 break
             case 'builder':
                 builder.run(creep)
+                break
+            case 'repairer':
+                repairer.run(creep)
                 break
         }
 
