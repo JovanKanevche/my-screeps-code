@@ -1,5 +1,6 @@
 const isWorking = creep => creep.memory.working == true
 const carryCapacityFull = creep => creep.carry.energy == creep.carryCapacity
+const roleUpgrader = require('./role.upgrader')
 
 module.exports = {
     run: creep => {
@@ -17,11 +18,15 @@ module.exports = {
             })
 
             if (structure != undefined) {
-                if (
-                    creep.upgradeController(creep.room.controller) ==
-                    ERR_NOT_IN_RANGE
+                const constructionSite = creep.pos.findClosestByPath(
+                    FIND_CONSTRUCTION_SITES
                 )
-                    creep.moveTo(creep.room.controller)
+
+                if (constructionSite != undefined) {
+                    if (creep.build(constructionSite) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(constructionSite)
+                    }
+                } else roleUpgrader.run(creep)
             }
         } else {
             const source = creep.pos.findClosestByPath(FIND_SOURCES)
