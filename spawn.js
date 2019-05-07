@@ -11,10 +11,22 @@ const MIN_NUMBER_OF_UPGRADERS = 2
 const MIN_NUMBER_OF_BUILDERS = 1
 const MIN_NUMBER_OF_REPAIRERS = 2
 
-const HARVESTER_PARTS = [WORK, WORK, CARRY, MOVE]
-const UPGRADER_PARTS = [WORK, CARRY, MOVE, MOVE]
-
 const countRoleF = creeps => role => _.sum(creeps, c => c.memory.role == role)
+
+const createBalancedCreep = ({ energy, spawn }) => role => {
+    const numberOfParts = Math.floor(energy / 200)
+
+    const body = [
+        ...Array(numberOfParts).fill(WORK),
+        ...Array(numberOfParts).fill(CARRRY),
+        ...Array(numberOfParts).fill(MOVE)
+    ]
+
+    return spawn.createCreep(body, undefined, {
+        role,
+        working: false
+    })
+}
 
 module.exports = {
     run: spawn => {
@@ -27,31 +39,19 @@ module.exports = {
         const numberOfBuilders = countRole('builder')
         const numberOfRepairers = countRole('repairer')
 
+        const createCreep = createBalancedCreep({
+            energy: Game.spawns.Spawn1.room.energyCapacityAvailable,
+            spawn
+        })
+
         if (numberOfHarversters < MIN_NUMBER_OF_HARVERSTERS) {
-            spawn.createCreep(HARVESTER_PARTS, undefined, {
-                role: 'harvester',
-                working: false
-            })
+            createCreep('harvester')
         } else if (numberOfUpgraders < MIN_NUMBER_OF_UPGRADERS) {
-            spawn.createCreep(UPGRADER_PARTS, undefined, {
-                role: 'upgrader',
-                working: false
-            })
+            createCreep('upgrader')
         } else if (numberOfRepairers < MIN_NUMBER_OF_REPAIRERS) {
-            spawn.createCreep(HARVESTER_PARTS, undefined, {
-                role: 'repairer',
-                working: false
-            })
+            createCreep('repairer')
         } else if (numberOfBuilders < MIN_NUMBER_OF_BUILDERS) {
-            spawn.createCreep(HARVESTER_PARTS, undefined, {
-                role: 'builder',
-                working: false
-            })
-        } else {
-            spawn.createCreep(HARVESTER_PARTS, undefined, {
-                role: 'builder',
-                working: false
-            })
-        }
+            createCreep('builder')
+        } else createCreep('builder')
     }
 }
