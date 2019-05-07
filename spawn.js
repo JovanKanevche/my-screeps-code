@@ -13,7 +13,6 @@ const MIN_NUMBER_OF_REPAIRERS = 2
 
 const HARVESTER_PARTS = [WORK, WORK, CARRY, MOVE]
 const UPGRADER_PARTS = [WORK, CARRY, MOVE, MOVE]
-const UPGRADER_PARTS = [WORK, CARRY, MOVE, MOVE]
 
 const countRoleF = creeps => role => _.sum(creeps, c => c.memory.role == role)
 
