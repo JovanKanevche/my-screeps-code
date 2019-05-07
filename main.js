@@ -21,7 +21,7 @@ module.exports.loop = () => {
                 repairer.run(creep)
                 break
         }
-
-        spawn.run(Game.spawns.Spawn1)
     }
+
+    spawn.run(Game.spawns.Spawn1)
 }
