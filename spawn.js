@@ -18,7 +18,7 @@ const createBalancedCreep = ({ energy, spawn }) => role => {
 
     const body = [
         ...Array(numberOfParts).fill(WORK),
-        ...Array(numberOfParts).fill(CARRRY),
+        ...Array(numberOfParts).fill(CARRY),
         ...Array(numberOfParts).fill(MOVE)
     ]
 
