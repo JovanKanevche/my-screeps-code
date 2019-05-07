@@ -22,7 +22,7 @@ module.exports = {
         )
         const numberOfUpgraders = _.sum(
             Game.creeps,
-            c => c.memory.role == 'upgraders'
+            c => c.memory.role == 'upgrader'
         )
 
         if (numberOfHarversters < MIN_NUMBER_OF_HARVERSTERS) {
