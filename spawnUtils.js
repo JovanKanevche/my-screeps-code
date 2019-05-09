@@ -29,7 +29,7 @@ const logRoles = ({
     numberOfBuilders,
     numberOfRepairers
 }) =>
-    console.info(
+    console.log(
         JSON.stringify(
             {
                 numberOfHarversters,
