@@ -3,9 +3,11 @@ const creepCore = require('./creepCore')
 
 module.exports = creepCore({
     work: creep => {
-        const structure = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, {
+        const structure = creep.pos.findClosestByPath(FIND_STRUCTURES, {
             filter: s =>
-                s.hits == s.hitsMax && s.structureType != STRUCTURE_WALL
+                s.hits < s.hitsMax &&
+                s.structureType != STRUCTURE_WALL &&
+                s.structureType != STRUCTURE_RAMPART
         })
 
         if (structure != undefined) {
