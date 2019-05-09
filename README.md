@@ -2,9 +2,9 @@
 
 There is code for
 
--   builders
--   harvesters
--   repairers
--   upgraders
--   spwan
--   towers
+-   Builders
+-   Harvesters
+-   Repairers
+-   Upgraders
+-   Spawn
+-   Towers
